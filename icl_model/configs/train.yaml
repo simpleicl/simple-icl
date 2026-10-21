@@ -1,0 +1,73 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - data: null
+  - model: null
+  - task: null
+
+output_dir: ./runs/train/${now:%Y-%m-%d}_${now:%H-%M-%S}
+
+# dataloading
+batch_size: 2
+num_workers: 4
+
+# scheduler
+lr_scheduler_type: "cosine"
+learning_rate: 1.0e-4
+num_epochs: 1
+max_steps: null
+log_every: 10
+save_every: 100
+eval_every: 50
+eval_num_inference_steps: 10
+
+# training
+# Trainable layout: VAEs always frozen, action expert + proprio encoder fully
+# trained, and the video expert either LoRA-tuned or fully fine-tuned (`use_lora`).
+
+# LoRA fine-tuning (video-expert only). When use_lora=true the video-expert
+# backbone is frozen and only low-rank adapters (+ configured fully-trainable
+# submodules such as the qformer) are trained; use_lora=false fully fine-tunes
+# the whole video expert (checkpoint then stores the complete `mot`).
+use_lora: false
+lora:
+  rank: 16
+  alpha: 16
+  dropout: 0.0
+  # nn.Linear submodules inside each DiT block that receive low-rank adapters.
+  target_modules: [self_attn.q, self_attn.k, self_attn.v, self_attn.o,
+                   cross_attn.q, cross_attn.k, cross_attn.v, cross_attn.o, ffn.0, ffn.2]
+  # top-level video_expert submodules kept fully trainable alongside the adapters.
+  # A name matching no submodule (e.g. `action_embedding` when action_conditioned
+  # is False) is dropped with a warning or fails fast at model construction
+  # (see helpers/lora.py:resolve_train_modules).
+  train_modules: [patch_embedding, text_embedding, time_embedding, time_projection,
+                  head, video_ctx_qformer, action_embedding]
+
+gradient_accumulation_steps: 1
+mixed_precision: "bf16" # one of: [no, fp16, bf16]
+seed: 42
+max_grad_norm: 1.0
+weight_decay: 0.0
+resume: null
+
+# cache precomputation (scripts/precompute_*.py)
+overwrite: false
+verify_only: false
+
+# wandb
+wandb:
+  enabled: false
+  workspace: null
+  project: simple-icl
+  name: train
+  group: null
+  mode: online
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${output_dir}
+  output_subdir: null

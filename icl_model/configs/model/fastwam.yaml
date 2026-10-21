@@ -1,0 +1,75 @@
+_target_: simpleicl.runtime.create_fastwam
+model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
+tokenizer_max_len: 128
+load_text_encoder: false
+proprio_dim: ${data.train.processor.proprio_output_dim}
+redirect_common_files: true
+mot_checkpoint_mixed_attn: true
+action_dit_pretrained_path: checkpoints/ActionDiT_linear_interp_Wan22_alphascale_1024hdim.pt
+skip_dit_load_from_pretrain: false
+
+# LoRA config is defined globally in configs/train.yaml; thread it into the model.
+use_lora: ${use_lora}
+lora: ${lora}
+
+# Optional path to a checkpoint whose `vae_cond` weights initialize the condition
+# VAE. The condition VAE is frozen in every mode; by default it is a copy of the
+# base VAE.
+vae_cond_pretrain_path: null
+
+video_dit_config:
+  has_image_input: false
+  patch_size: [1, 2, 2]
+  in_dim: 48
+  hidden_dim: 3072
+  ffn_dim: 14336
+  freq_dim: 256
+  text_dim: 4096
+  out_dim: 48
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  eps: 1.0e-06
+  seperated_timestep: true
+  require_clip_embedding: false
+  require_vae_embedding: false
+  fuse_vae_embedding_in_latents: true
+  use_gradient_checkpointing: ${model.mot_checkpoint_mixed_attn}
+  video_attention_mask_mode: "first_frame_causal" # default
+  action_conditioned: false
+  action_dim: ${data.train.processor.action_output_dim}
+  action_group_causal_mask_mode: "group_diagonal"
+  has_video_ctx_condition: true
+  # BLIP2-style Q-Former distilling video_ctx into the DiT cross-attention context.
+  video_ctx_num_query_tokens: 64
+  video_ctx_qformer_layers: 4
+  video_ctx_qformer_cross_attn_freq: 2
+
+action_dit_config:
+  action_dim: ${data.train.processor.action_output_dim}
+  hidden_dim: 1024
+  ffn_dim: 4096
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  text_dim: 4096
+  freq_dim: 256
+  eps: 1.0e-06
+  use_gradient_checkpointing: ${model.mot_checkpoint_mixed_attn}
+  # Enables ActionDiT cross-attention to video_ctx tokens from the video expert.
+  video_ctx_context_dim: null
+
+video_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+
+action_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+
+loss:
+  lambda_video: 1.0
+  lambda_action: 1.0

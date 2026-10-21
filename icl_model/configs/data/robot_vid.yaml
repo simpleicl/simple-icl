@@ -1,0 +1,68 @@
+train:
+  _target_: simpleicl.datasets.lerobot.robot_video_dataset.RobotVideoDataset
+  dataset_dirs:
+    - /path/to/lerobot_datasets/dataset_a/realworld_label
+    - /path/to/lerobot_datasets/dataset_b/realworld_label
+    # Add one entry per LeRobot dataset directory used for training.
+  video_size: [384, 448] # final resize video
+  video_ctx_size: [256, 448]
+  video_ctx_num_frames: 25
+  video_ctx_latent_cache_dir: null
+  video_ctx_latent_cache_mode: "off"
+  cond_flags:
+    list_cond: true
+  shape_meta:
+    images:
+      - key: cam_high
+        raw_shape: [3, 480, 848]
+        shape: [3, 256, 448]
+      - key: cam_left_wrist
+        raw_shape: [3, 480, 848]
+        shape: [3, 256, 448]
+      - key: cam_right_wrist
+        raw_shape: [3, 480, 848]
+        shape: [3, 256, 448]
+    action:
+      - key: default
+        raw_shape: 16 # before transform
+        shape: 16 # after transform
+    state:
+      - key: default
+        raw_shape: 16 # before transform
+        shape: 16 # after transform
+  num_frames: 33
+  global_sample_stride: 2
+  action_video_freq_ratio: 4 # 32 action, 9 video frames
+  camera_key: null
+  val_set_proportion: 0.01
+  is_training_set: true
+  pretrained_norm_stats: null
+  skip_padding_as_possible: false
+  concat_multi_camera: "realworld"
+  processor:
+    _target_: simpleicl.datasets.lerobot.processors.fastwam_processor.FastWAMProcessor
+    shape_meta: ${data.train.shape_meta}
+    num_obs_steps: ${data.train.num_frames}
+    num_output_cameras: 3
+    action_output_dim: 16
+    proprio_output_dim: 16
+
+    # action & state normalization
+    action_state_transforms: null
+    use_stepwise_action_norm: False
+    norm_default_mode: "z-score"
+    norm_exception_mode: null
+
+    action_state_merger:
+      _target_: simpleicl.datasets.lerobot.transforms.action_state_merger.ConcatLeftAlign
+
+    train_transforms:
+      - _target_: simpleicl.datasets.lerobot.transforms.image.ToTensor
+      - _target_: torchvision.transforms.Resize
+        size: [256, 448]
+    val_transforms:
+      - _target_: simpleicl.datasets.lerobot.transforms.image.ToTensor
+      - _target_: torchvision.transforms.Resize
+        size: [256, 448]
+  text_embedding_cache_dir: null
+  context_len: 128

@@ -1,0 +1,49 @@
+# @package _global_
+
+defaults:
+  - override /data: robot_vid
+  - override /model: fastwam
+  - _self_
+
+# dataloading
+batch_size: 16
+num_workers: 8
+
+data:
+  train:
+    # Point this at the robot-side dataset dir(s) of your training data
+    # (see README, Training). Multiple entries allowed; the human/ dataset
+    # referenced by meta/conditions_list.json must stay next to each entry.
+    # Sample dataset downloaded to the default location:
+    #   - ../data_collection/outputs/data_sample/robot
+    dataset_dirs:
+      # - /path/to/your/robot/dataset
+      - ../data_collection/outputs/data_sample/robot
+    # Default cache locations, prepared automatically on training startup.
+    text_embedding_cache_dir: cache/robot/text_embeds
+    video_ctx_latent_cache_dir: cache/robot/video_ctx_latents
+    video_ctx_latent_cache_mode: required
+
+model:
+  mot_checkpoint_mixed_attn: false
+  video_dit_config:
+    has_video_ctx_condition: true
+    video_ctx_num_query_tokens: 128
+  action_dit_config:
+    video_ctx_context_dim: ${model.video_dit_config.hidden_dim}
+
+use_lora: true
+
+# scheduler
+lr_scheduler_type: "cosine"
+learning_rate: 5e-5
+num_epochs: 10
+max_steps: null
+log_every: 10
+save_every: 1000
+eval_every: 250
+
+# training
+gradient_accumulation_steps: 1
+weight_decay: 1e-2
+resume: null

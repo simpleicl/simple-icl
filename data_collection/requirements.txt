@@ -1,0 +1,26 @@
+# Dependencies for the data-collection pipeline only (lerobot source tree in
+# ./lerobot, the convert/replay scripts, and franka_fastwam_client.py).
+# PyTorch builds are platform-specific (CUDA/ROCm) -- install a build matching
+# your system first, then `pip install -r requirements.txt`.
+torch
+torchvision
+torchcodec
+numpy
+pandas
+pyarrow
+datasets
+av
+pillow
+opencv-python
+pynput
+huggingface_hub
+jsonlines
+draccus
+deepdiff
+termcolor
+rerun-sdk
+
+# Optional extras, uncomment as needed:
+#   lerobot/gui.py interactive GUI ......... PyQt5
+#   Real RealSense cameras ................. pyrealsense2
+#   Franka real-robot libfranka bindings ... pinocchio
