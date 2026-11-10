@@ -15,12 +15,19 @@ wandb/
 *.log
 
 # Simulation resources and generated outputs
-/sim/assets/
-/sim/checkpoints/
-/sim/data/
+/sim/assets/*
+/sim/checkpoints/*
+/sim/data/*
 /sim/outputs/
 
 # Real-robot data and training artifacts
 /real/data_collection/outputs/
-/real/icl_model/checkpoints/
+/real/icl_model/checkpoints/*
 /real/icl_model/runs/
+
+# Placeholders
+!/sim/assets/.gitkeep
+!/sim/checkpoints/.gitkeep
+!/sim/data/.gitkeep
+
+!/real/icl_model/checkpoints/.gitkeep
