@@ -1,0 +1,764 @@
+{
+  "BEAT_BLOCK_HAMMER": {
+    "task_name": "beat_block_hammer",
+    "actor_list": {
+      "self.hammer": {
+        "name": "hammer",
+        "description": "The hammer used to beat the block.",
+        "modelname": "020_hammer"
+      },
+      "self.block": {
+        "name": "block",
+        "description": "The block that needs to be beaten by the hammer.",
+        "modelname": "sapien-block1"
+      }
+    }
+  },
+  "PICK_DUAL_BOTTLES_EASY": {
+    "task_name": "pick_dual_bottles",
+    "actor_list": {
+      "self.bottle1": {
+        "name": "bottle1",
+        "description": "The first bottle to be picked up, placed on the left side.",
+        "modelname": "001_bottle"
+      },
+      "self.bottle2": {
+        "name": "bottle2",
+        "description": "The second bottle to be picked up, placed on the right side.",
+        "modelname": "001_bottle"
+      },
+      "self.left_target_pose": {
+        "name": "left_target_pose",
+        "description": "The target pose for the left arm to place bottle1.",
+        "modelname": null
+      },
+      "self.right_target_pose": {
+        "name": "right_target_pose",
+        "description": "The target pose for the right arm to place bottle2.",
+        "modelname": null
+      }
+    }
+  },
+  "PICK_DIVERSE_BOTTLES": {
+    "task_name": "pick_diverse_bottles",
+    "actor_list": {
+      "self.bottle1": {
+        "name": "bottle1",
+        "description": "The first bottle to be picked up, placed on the left side.",
+        "modelname": "001_bottle"
+      },
+      "self.bottle2": {
+        "name": "bottle2",
+        "description": "The second bottle to be picked up, placed on the right side.",
+        "modelname": "001_bottle"
+      },
+      "self.left_target_pose": {
+        "name": "left_target_pose",
+        "description": "The target pose for the left arm to place bottle1.",
+        "modelname": null
+      },
+      "self.right_target_pose": {
+        "name": "right_target_pose",
+        "description": "The target pose for the right arm to place bottle2.",
+        "modelname": null
+      }
+    }
+  },
+  "STACK_BLOCKS_TWO": {
+    "task_name": "stack_blocks_two",
+    "actor_list": {
+      "self.block1": {
+        "name": "block1",
+        "description": "The first block to be stacked.",
+        "modelname": "sapien-block1"
+      },
+      "self.block2": {
+        "name": "block2",
+        "description": "The second block to be stacked on top of the first block.",
+        "modelname": "sapien-block1"
+      },
+      "self.block1_target_pose": {
+        "name": "block1_target_pose",
+        "description": "The target pose for the first block after stacking."
+      }
+    }
+  },
+  "STACK_BLOCKS_THREE": {
+    "task_name": "stack_blocks_three",
+    "actor_list": {
+      "self.block1": {
+        "name": "block1",
+        "description": "The first block to be stacked.",
+        "modelname": "sapien-block1"
+      },
+      "self.block2": {
+        "name": "block2",
+        "description": "The second block to be stacked on top of the first block.",
+        "modelname": "sapien-block1"
+      },
+      "self.block3": {
+        "name": "block3",
+        "description": "The third block to be stacked on top of the second block.",
+        "modelname": "sapien-block1"
+      },
+      "self.block1_target_pose": {
+        "name": "block1_target_pose",
+        "description": "The target pose for the first block after stacking."
+      }
+    }
+  },
+  "PLACE_CONTAINER_PLATE": {
+    "task_name": "place_container_plate",
+    "actor_list": {
+      "self.container": {
+        "name": "container",
+        "description": "The container that needs to be placed in the plate.",
+        "modelname": "002_bowl"
+      },
+      "self.plate": {
+        "name": "plate",
+        "description": "The plate where the container needs to be placed.",
+        "modelname": "003_plate"
+      }
+    }
+  },
+  "PLACE_EMPTY_CUP": {
+    "task_name": "place_empty_cup",
+    "actor_list": {
+      "self.cup": {
+        "name": "cup",
+        "description": "The empty cup that needs to be placed on the coaster.",
+        "modelname": "021_cup"
+      },
+      "self.coaster": {
+        "name": "coaster",
+        "description": "The coaster where the empty cup needs to be placed.",
+        "modelname": "019_coaster"
+      }
+    }
+  },
+  "PLACE_SHOE": {
+    "task_name": "place_shoe",
+    "actor_list": {
+      "self.shoe": {
+        "name": "shoe",
+        "description": "The shoe that needs to be placed on the target block.",
+        "modelname": "041_shoe"
+      },
+      "self.target_block": {
+        "name": "target_block",
+        "description": "The target block where the shoe needs to be placed.",
+        "modelname": "sapien-block1"
+      }
+    }
+  },
+  "PLACE_DUAL_SHOES": {
+    "task_name": "place_dual_shoes",
+    "actor_list": {
+      "self.left_shoe": {
+        "name": "left_shoe",
+        "description": "The left shoe that needs to be placed in the shoe box.",
+        "modelname": "041_shoe"
+      },
+      "self.right_shoe": {
+        "name": "right_shoe",
+        "description": "The right shoe that needs to be placed in the shoe box.",
+        "modelname": "041_shoe"
+      },
+      "self.shoe_box": {
+        "name": "shoe_box",
+        "description": "The shoe box where the shoes need to be placed.",
+        "modelname": "007_shoe-box"
+      },
+      "self.right_shoe_middle_pose": {
+        "name": "right_shoe_middle_pose",
+        "description": "The middle pose for the right arm to place the right shoe, which is used to avoid collisions when placing the left shoes.",
+        "modelname": null
+      }
+    }
+  },
+  "ADJUST_BOTTLE": {
+    "task_name": "adjust_bottle",
+    "actor_list": {
+      "self.bottle": {
+        "name": "bottle",
+        "description": "The bottle should be picked up and placed at the target pose.",
+        "modelname": "001_bottle"
+      },
+      "self.qpose_tag": {
+        "name": "qpose_tag",
+        "description": "A tag indicating which arm to use for picking up the bottle.                            0 means left arm, 1 means right arm."
+      },
+      "self.left_target_pose": {
+        "name": "left_target_pose",
+        "description": "Target pose when use left arm to pick up the bottle."
+      },
+      "self.right_target_pose": {
+        "name": "right_target_pose",
+        "description": "Target pose when use right arm to pick up the bottle."
+      }
+    }
+  },
+  "BLOCKS_RANKING_RGB": {
+    "task_name": "blocks_ranking_rgb",
+    "actor_list": {
+      "self.block1": {
+        "name": "box",
+        "description": "Red block that should be placed on the left side.",
+        "modelname": "sapien-block1"
+      },
+      "self.block2": {
+        "name": "box",
+        "description": "Green block that should be placed in the middle.",
+        "modelname": "sapien-block1"
+      },
+      "self.block3": {
+        "name": "box",
+        "description": "Blue block that should be placed on the right side.",
+        "modelname": "sapien-block1"
+      },
+      "self.block1_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the red block."
+      },
+      "self.block2_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the green block."
+      },
+      "self.block3_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the blue block."
+      }
+    }
+  },
+  "BLOCKS_RANKING_SIZE": {
+    "task_name": "blocks_ranking_size",
+    "actor_list": {
+      "self.block1": {
+        "name": "box",
+        "description": "The largest block that should be placed on the left side.",
+        "modelname": "sapien-block1"
+      },
+      "self.block2": {
+        "name": "box",
+        "description": "The middle block that should be placed in the middle.",
+        "modelname": "sapien-block1"
+      },
+      "self.block3": {
+        "name": "box",
+        "description": "The smallest block that should be placed on the right side.",
+        "modelname": "sapien-block1"
+      },
+      "self.block1_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the largest block."
+      },
+      "self.block2_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the middle block."
+      },
+      "self.block3_target_pose": {
+        "name": "target_pose",
+        "description": "Target pose for the smallest block."
+      }
+    }
+  },
+  "CLICK_BELL": {
+    "task_name": "click_bell",
+    "actor_list": {
+      "self.bell": {
+        "name": "bell",
+        "description": "The bell that needs to be clicked.",
+        "modelname": "050_bell"
+      }
+    }
+  },
+  "GRAB_ROLLER": {
+    "task_name": "grab_roller",
+    "actor_list": {
+      "self.roller": {
+        "name": "roller",
+        "description": "The roller that needs to be grabbed.",
+        "modelname": "102_roller"
+      }
+    }
+  },
+  "LIFT_POT": {
+    "task_name": "lift_pot",
+    "actor_list": {
+      "self.pot": {
+        "name": "pot",
+        "description": "The pot that needs to be lifted.",
+        "modelname": "060_kitchenpot"
+      }
+    }
+  },
+  "MOVE_CAN_POT": {
+    "task_name": "move_can_pot",
+    "actor_list": {
+      "self.can": {
+        "name": "can",
+        "description": "The can that needs to be moved to the pot.",
+        "modelname": "105_sauce-can"
+      },
+      "self.pot": {
+        "name": "pot",
+        "description": "The pot at the center of the table.",
+        "modelname": "060_kitchenpot"
+      },
+      "self.target_pose": {
+        "name": "target_pose",
+        "description": "The target pose where the can should be placed beside the pot."
+      }
+    }
+  },
+  "MOVE_PLAYINGCARD_AWAY": {
+    "task_name": "move_playingcard_away",
+    "actor_list": {
+      "self.playingcards": {
+        "name": "playingcards",
+        "description": "The playing cards that need to be moved to left or right.",
+        "modelname": "081_playingcards"
+      }
+    }
+  },
+  "MOVE_STAPLER_PAD": {
+    "task_name": "move_stapler_pad",
+    "actor_list": {
+      "self.stapler": {
+        "name": "stapler",
+        "description": "The stapler that needs to be moved to the pad.",
+        "modelname": "048_stapler"
+      },
+      "self.target_pose": {
+        "name": "target",
+        "description": "The target pose where the stapler should be placed on the pad."
+      }
+    }
+  },
+  "CLICK_ALARMCLOCK": {
+    "task_name": "click_alarmclock",
+    "actor_list": {
+      "self.alarm": {
+        "name": "alarm",
+        "description": "The alarm clock that needs to be clicked.",
+        "modelname": "046_alarm-clock"
+      }
+    }
+  },
+  "DUMP_BIN_BIGBIN": {
+    "task_name": "dump_bin_bigbin",
+    "actor_list": {
+      "self.deskbin": {
+        "name": "deskbin",
+        "description": "The small bin that needs to be dumped into the big bin.",
+        "modelname": "005_desk-bin"
+      },
+      "self.pour_actions": {
+        "name": "pour_actions",
+        "description": "The final actions for pouring the balls into the big bin, use self.move(self.pour_actions) to perform the pouring actions.",
+        "modelname": null
+      },
+      "self.middle_pose": {
+        "name": "middle_pose",
+        "description": "The middle pose where the deskbin should be placed before pouring.",
+        "modelname": null
+      }
+    }
+  },
+  "HANDOVER_MIC": {
+    "task_name": "handover_mic",
+    "actor_list": {
+      "self.microphone": {
+        "name": "microphone",
+        "description": "The microphone that needs to be handed over.",
+        "modelname": "018_microphone"
+      },
+      "self.handover_middle_pose": {
+        "name": "handover_middle_pose",
+        "description": "The middle pose for the handover arm to grasp the microphone from the grasping arm.",
+        "modelname": null
+      }
+    }
+  },
+  "MOVE_PILLBOTTLE_PAD": {
+    "task_name": "move_pillbottle_pad",
+    "actor_list": {
+      "self.pillbottle": {
+        "name": "pillbottle",
+        "description": "The pillbottle that needs to be moved to the pad.",
+        "modelname": "080_pillbottle"
+      },
+      "self.pad": {
+        "name": "pad",
+        "description": "The pad where the pillbottle should be placed.",
+        "modelname": "sapien-block1"
+      }
+    }
+  },
+  "PLACE_A2B_LEFT": {
+    "task_name": "place_a2b_left",
+    "actor_list": {
+      "self.object": {
+        "name": "object",
+        "description": "The object that needs to be placed on the left of the target object.",
+        "modelname": null
+      },
+      "self.target_object": {
+        "name": "target_object",
+        "description": "The target object where the object should be placed to its left, you can get the target pose from this object by target_pose = self.target_object.get_pose().p.tolist()",
+        "modelname": null
+      }
+    }
+  },
+  "PLACE_A2B_RIGHT": {
+    "task_name": "place_a2b_right",
+    "actor_list": {
+      "self.object": {
+        "name": "object",
+        "description": "The object that needs to be placed on the right of the target object.",
+        "modelname": null
+      },
+      "self.target_object": {
+        "name": "target_object",
+        "description": "The target object where the object should be placed to its left, you can get the target pose from this object by target_pose = self.target_object.get_pose().p.tolist()",
+        "modelname": null
+      }
+    }
+  },
+  "PLACE_BREAD_BASKET": {
+    "task_name": "place_bread_basket",
+    "actor_list": {
+      "self.bread[id]": {
+        "name": "bread[id]",
+        "description": "A list of breads that need to be placed in the basket. If there is one bread, id=0. If there are two breads, id=0 and id=1.",
+        "modelname": "075_bread"
+      },
+      "self.breadbasket": {
+        "name": "breadbasket",
+        "description": "The basket where the bread needs to be placed.",
+        "modelname": "076_breadbasket"
+      }
+    }
+  },
+  "PLACE_BREAD_SKILLET": {
+    "task_name": "place_bread_skillet",
+    "actor_list": {
+      "self.bread": {
+        "name": "bread",
+        "description": "The bread that needs to be placed in the skillet.",
+        "modelname": "075_bread"
+      },
+      "self.skillet": {
+        "name": "skillet",
+        "description": "The skillet where the bread needs to be placed.",
+        "modelname": "106_skillet"
+      }
+    }
+  },
+  "PLACE_CAN_BASKET": {
+    "task_name": "place_can_basket",
+    "actor_list": {
+      "self.can": {
+        "name": "can",
+        "description": "The can that needs to be placed in the basket.",
+        "modelname": "071_can"
+      },
+      "self.basket": {
+        "name": "basket",
+        "description": "The basket where the can needs to be placed.",
+        "modelname": "110_basket"
+      },
+      "self.get_arm_pose(arm_tag=self.arm_tag)": {
+        "name": "place_pose",
+        "description": "The target pose where the can should be placed in the basket.",
+        "modelname": null
+      }
+    }
+  },
+  "PLACE_CANS_PLASTICBOX": {
+    "task_name": "place_cans_plasticbox",
+    "actor_list": {
+      "self.object1": {
+        "name": "object1",
+        "description": "The first object to be placed in the plastic box.",
+        "modelname": "071_can"
+      },
+      "self.object2": {
+        "name": "object2",
+        "description": "The second object to be placed in the plastic box.",
+        "modelname": "071_can"
+      },
+      "self.plasticbox": {
+        "name": "plasticbox",
+        "description": "The plastic box where the objects need to be placed.",
+        "modelname": "062_plasticbox"
+      }
+    }
+  },
+  "PLACE_FAN": {
+    "task_name": "place_fan",
+    "actor_list": {
+      "self.fan": {
+        "name": "fan",
+        "description": "The fan that needs to be placed on the pad.",
+        "modelname": "099_fan"
+      },
+      "self.target_pose": {
+        "name": "target_pose",
+        "description": "The target pose where the fan should be placed on the pad.",
+        "modelname": null
+      }
+    }
+  },
+  "PLACE_BURGER_FRIES": {
+    "task_name": "place_burger_fries",
+    "actor_list": {
+      "self.hamburg": {
+        "name": "hamburg",
+        "description": "The hamburg that needs to be placed on the tray.",
+        "modelname": "006_hamburg"
+      },
+      "self.frenchfries": {
+        "name": "frenchfries",
+        "description": "The french fries that needs to be placed on the tray.",
+        "modelname": "005_french-fries"
+      },
+      "self.tray": {
+        "name": "tray",
+        "description": "The tray where the hamburg and french fries need to be placed.",
+        "modelname": "008_tray"
+      }
+    }
+  },
+  "PLACE_MOUSE_PAD": {
+    "task_name": "place_mouse_pad",
+    "actor_list": {
+      "self.mouse": {
+        "name": "mouse",
+        "description": "The mouse that needs to be placed on the pad.",
+        "modelname": "047_mouse"
+      },
+      "self.target_pose": {
+        "name": "target_pose",
+        "description": "The target pose where the mouse should be placed on the pad.",
+        "modelname": null
+      }
+    }
+  },
+  "PLACE_OBJECT_BASKET": {
+    "task_name": "place_object_basket",
+    "actor_list": {
+      "self.object": {
+        "name": "object",
+        "description": "The object that needs to be placed in the basket.",
+        "modelname": null
+      },
+      "self.basket": {
+        "name": "basket",
+        "description": "The basket where the object needs to be placed.",
+        "modelname": "110_basket"
+      }
+    }
+  },
+  "PLACE_OBJECT_SCALE": {
+    "task_name": "place_object_scale",
+    "actor_list": {
+      "self.object": {
+        "name": "object",
+        "description": "The object that needs to be placed on the scale.",
+        "modelname": null
+      },
+      "self.scale": {
+        "name": "scale",
+        "description": "The scale where the object needs to be placed.",
+        "modelname": "072_electronicscale"
+      }
+    }
+  },
+  "PLACE_OBJECT_STAND": {
+    "task_name": "place_object_stand",
+    "actor_list": {
+      "self.object": {
+        "name": "object",
+        "description": "The object that needs to be placed on the stand.",
+        "modelname": null
+      },
+      "self.displaystand": {
+        "name": "displaystand",
+        "description": "The display stand where the object needs to be placed.",
+        "modelname": "074_displaystand"
+      }
+    }
+  },
+  "PLACE_PHONE_STAND": {
+    "task_name": "place_phone_stand",
+    "actor_list": {
+      "self.phone": {
+        "name": "phone",
+        "description": "The phone that needs to be placed on the stand.",
+        "modelname": "077_phone"
+      },
+      "self.stand": {
+        "name": "stand",
+        "description": "The phone stand where the phone needs to be placed.",
+        "modelname": "078_phonestand"
+      }
+    }
+  },
+  "PRESS_STAPLER": {
+    "task_name": "press_stapler",
+    "actor_list": {
+      "self.stapler": {
+        "name": "stapler",
+        "description": "The stapler that needs to be pressed.",
+        "modelname": "048_stapler"
+      }
+    }
+  },
+  "ROTATE_QRCODE": {
+    "task_name": "rotate_qrcode",
+    "actor_list": {
+      "self.qrcode": {
+        "name": "qrcode",
+        "description": "The QR code sign that needs to be rotated.",
+        "modelname": "070_paymentsign"
+      },
+      "self.target_pose": {
+        "name": "target_pose",
+        "description": "The target pose where the QR code should be placed.",
+        "modelname": null
+      }
+    }
+  },
+  "STACK_BOWLS_THREE": {
+    "task_name": "stack_bowls_three",
+    "actor_list": {
+      "self.bowl1": {
+        "name": "bowl1",
+        "description": "The first bowl that should be placed at the bottom, you can get bowl1's position by using self.bowl1.get_pose().p.",
+        "modelname": "002_bowl"
+      },
+      "self.bowl2": {
+        "name": "bowl2",
+        "description": "The second bowl that should be placed above the first bowl, you can get bowl1's position by using self.bowl1.get_pose().p, you can get the target pose of bowl 2 by adding 5 cm to the z-axis of bowl 1's target pose.",
+        "modelname": "002_bowl"
+      },
+      "self.bowl3": {
+        "name": "bowl3",
+        "description": "The third bowl that should be placed above the second bowl, you can get bowl2's position by using self.bowl2.get_pose().p, you can get the target pose of bowl 3 by adding 5 cm to the z-axis of bowl 2's target pose.",
+        "modelname": "002_bowl"
+      },
+      "self.bowl1_target_pose": {
+        "name": "bowl1_target_pose",
+        "description": "The target pose for the first bowl. It's a numpy.ndarray([x, y, z]) that should use .tolist() to be concatenated with the quaternion later.",
+        "modelname": null
+      },
+      "self.quat_of_target_pose": {
+        "name": "quat_of_target_pose",
+        "description": "The quaternion of the target pose for the bowls, To be concatenated with the target pose.",
+        "modelname": null
+      }
+    }
+  },
+  "STACK_BOWLS_TWO": {
+    "task_name": "stack_bowls_two",
+    "actor_list": {
+      "self.bowl1": {
+        "name": "bowl1",
+        "description": "The first bowl that should be placed at the bottom, you can get bowl1's position by using self.bowl1.get_pose().p.",
+        "modelname": "002_bowl"
+      },
+      "self.bowl2": {
+        "name": "bowl2",
+        "description": "The second bowl that should be placed above the first bowl, you can get bowl1's position by using self.bowl1.get_pose().p, you can get the target pose of bowl 2 by adding 5 cm to the z-axis of bowl 1's target pose.",
+        "modelname": "002_bowl"
+      },
+      "self.bowl1_target_pose": {
+        "name": "bowl1_target_pose",
+        "description": "The target pose for the first bowl. It's a numpy.ndarray([x, y, z]) that should use .tolist() to be concatenated with the quaternion later.",
+        "modelname": null
+      },
+      "self.quat_of_target_pose": {
+        "name": "quat_of_target_pose",
+        "description": "The quaternion of the target pose for the bowls, To be concatenated with the target pose.",
+        "modelname": null
+      }
+    }
+  },
+  "STAMP_SEAL": {
+    "task_name": "stamp_seal",
+    "actor_list": {
+      "self.seal": {
+        "name": "seal",
+        "description": "The seal that needs to be placed on the target block.",
+        "modelname": "100_seal"
+      },
+      "self.target_pose": {
+        "name": "target_pose",
+        "description": "The target pose where the seal should be placed on the target block.",
+        "modelname": null
+      }
+    }
+  },
+  "SHAKE_BOTTLE_HORIZONTALLY": {
+    "task_name": "shake_bottle_horizontally",
+    "actor_list": {
+      "self.bottle": {
+        "name": "bottle",
+        "description": "The bottle that needs to be shaken horizontally.",
+        "modelname": "001_bottle"
+      }
+    }
+  },
+  "SHAKE_BOTTLE": {
+    "task_name": "shake_bottle",
+    "actor_list": {
+      "self.bottle": {
+        "name": "bottle",
+        "description": "The bottle that needs to be shaken.",
+        "modelname": "001_bottle"
+      }
+    }
+  },
+  "TURN_SWITCH": {
+    "task_name": "turn_switch",
+    "actor_list": {
+      "self.switch": {
+        "name": "switch",
+        "description": "The switch that needs to be turned on or off.",
+        "modelname": "056_switch"
+      }
+    }
+  },
+  "OPEN_LAPTOP": {
+    "task_name": "open_laptop",
+    "actor_list": {
+      "self.laptop": {
+        "name": "laptop",
+        "description": "The laptop that needs to be opened.",
+        "modelname": "015_laptop"
+      }
+    }
+  },
+  "OPEN_MICROWAVE": {
+    "task_name": "open_microwave",
+    "actor_list": {
+      "self.microwave": {
+        "name": "microwave",
+        "description": "The microwave that needs to be opened.",
+        "modelname": "044_microwave"
+      }
+    }
+  },
+  "CLOSE_LAPTOP": {
+    "task_name": "close_laptop",
+    "actor_list": {
+      "self.laptop": {
+        "name": "laptop",
+        "description": "The open laptop that needs to be closed.",
+        "modelname": "015_laptop"
+      }
+    }
+  }
+}

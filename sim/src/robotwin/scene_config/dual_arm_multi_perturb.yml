@@ -1,0 +1,57 @@
+# Recording settings
+render_freq: 0
+episode_num: 200
+hide_robot: false
+use_seed: false
+save_freq: 15
+# Record an ALOHA demonstration and successful perturbed ALOHA subjects.
+embodiments:
+  - [aloha-agilex]
+language_num: 100
+camera:
+  head_camera_type: D435
+  wrist_camera_type: D435
+  collect_head_camera: true
+  collect_wrist_camera: true
+data_type:
+  rgb: true
+  third_view: false
+  depth: false
+  pointcloud: false
+  observer: false
+  endpose: true
+  qpos: true
+  mesh_segmentation: false
+  actor_segmentation: false
+pcd_down_sample_num: 1024
+pcd_crop: true
+save_path: ./data
+clear_cache_freq: 5
+collect_data: true
+eval_video_log: true
+
+# Scene-generation randomization
+generation:
+  random_table_height: 0.03     # Freeze one table_z_bias in [-0.03, 0] per scene, shared by the demonstration and subjects.
+
+# Collection-time randomization
+collection:
+  random_background: true
+  clean_background_rate: 0.02
+  random_light: true
+  crazy_random_light_rate: 0.02
+  cluttered_table: true
+  random_head_camera_dis: 0
+
+# Paired perturbations: one baseline anchor and K variants
+# The ALOHA demonstration is unperturbed; ALOHA subjects sample K pose variants.
+# Use <emb>__pert<k> directories; retain pairs with a successful anchor and >= min_variants successes.
+pair_perturbation:
+  enabled: true
+  translation: 0.10    # Uniform xy offset range per axis (meters).
+  yaw_deg: 45          # Uniform yaw range about world z (degrees).
+  max_retries: 20      # Maximum collision-avoidance retries per object.
+  clearance: 0.0       # Extra separation in dist > r_i + r_j + clearance (meters).
+  num_variants: 4      # K: subject variants per placement.
+  min_variants: 2      # m: minimum successful variants required to retain a pair.
+  fallback_zero_translation: false   # Fail the variant when retries run out; do not use zero translation.

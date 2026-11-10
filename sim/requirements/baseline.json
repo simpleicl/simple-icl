@@ -1,0 +1,14 @@
+{
+  "patches": {
+    "mplib": {
+      "version": "0.2.1",
+      "state": "original",
+      "sha256": "785f77233baf4159f3327b664fae2507572c189223a6075f42546c1133ddfa0e"
+    },
+    "sapien": {
+      "version": "3.0.0b1",
+      "state": "original",
+      "sha256": "eabba86fe7d244ce8d469010f96914010a8883ea5835c86a8bc58be310510683"
+    }
+  }
+}

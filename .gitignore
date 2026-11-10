@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Caches, logs, experiment tracking
+.cache/
+.hydra/
+wandb/
+*.log
+
+# Simulation resources and generated outputs
+/sim/assets/
+/sim/checkpoints/
+/sim/data/
+/sim/outputs/
+
+# Real-robot data and training artifacts
+/real/data_collection/outputs/
+/real/icl_model/checkpoints/
+/real/icl_model/runs/

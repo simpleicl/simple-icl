@@ -1,0 +1,67 @@
+# @package _global_
+
+defaults:
+- _self_
+- data: null
+- model: null
+- task: null
+- override hydra/job_logging: disabled
+output_dir: ${oc.env:SIMPLEICL_OUTPUTS,./outputs}/train/${now:%Y%m%d_%H%M%S}
+batch_size: 2
+num_workers: 4
+lr_scheduler_type: cosine
+learning_rate: 0.0001
+num_epochs: 1
+max_steps: null
+log_every: 10
+save_every: 100
+eval_every: 50
+eval_num_inference_steps: 10
+loss_smoothing:
+  enabled: true
+  decay: 0.9
+mode: original
+override_instruction: null
+use_lora: false
+lora:
+  rank: 16
+  alpha: 16
+  dropout: 0.0
+  target_modules:
+  - self_attn.q
+  - self_attn.k
+  - self_attn.v
+  - self_attn.o
+  - cross_attn.q
+  - cross_attn.k
+  - cross_attn.v
+  - cross_attn.o
+  - ffn.0
+  - ffn.2
+  train_modules:
+  - patch_embedding
+  - text_embedding
+  - time_embedding
+  - time_projection
+  - head
+  - video_all_qformer
+  - action_embedding
+gradient_accumulation_steps: 1
+mixed_precision: bf16
+seed: 42
+max_grad_norm: 1.0
+weight_decay: 0.0
+resume: null
+wandb:
+  enabled: false
+  workspace: null
+  project: simpleicl
+  name: train
+  group: null
+  mode: online
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${output_dir}
+  output_subdir: null

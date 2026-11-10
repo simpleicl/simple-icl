@@ -1,0 +1,44 @@
+_target_: simpleicl.runtime.create_simpleicl_action_only
+model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
+tokenizer_max_len: 128
+load_text_encoder: false
+proprio_dim: ${data.train.processor.proprio_output_dim}
+redirect_common_files: true
+action_dit_pretrained_path: ${oc.env:SIMPLEICL_ACTION_INIT,./checkpoints/action_init.pt}
+skip_dit_load_from_pretrain: false
+vae_cond_pretrain_path: null
+mode: ${mode}
+share_vae_cond: null
+qformer_config:
+  hidden_dim: 3072
+  in_dim: 48
+  ffn_dim: 14336
+  patch_size:
+  - 1
+  - 2
+  - 2
+  num_heads: 24
+  attn_head_dim: 128
+  num_query_tokens: 128
+  num_layers: 4
+  cross_attn_freq: 2
+  eps: 1.0e-06
+action_dit_config:
+  action_dim: ${data.train.processor.action_output_dim}
+  hidden_dim: 1024
+  ffn_dim: 4096
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  text_dim: 4096
+  freq_dim: 256
+  eps: 1.0e-06
+  use_gradient_checkpointing: false
+  video_all_context_dim: ${model.qformer_config.hidden_dim}
+action_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+loss:
+  lambda_action: 1.0

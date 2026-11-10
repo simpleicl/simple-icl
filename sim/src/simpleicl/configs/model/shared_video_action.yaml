@@ -1,0 +1,69 @@
+_target_: simpleicl.runtime.create_simpleicl
+model_id: Wan-AI/Wan2.2-TI2V-5B
+tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
+tokenizer_max_len: 128
+load_text_encoder: false
+proprio_dim: ${data.train.processor.proprio_output_dim}
+redirect_common_files: true
+mot_checkpoint_mixed_attn: true
+action_dit_pretrained_path: ${oc.env:SIMPLEICL_ACTION_INIT,./checkpoints/action_init.pt}
+skip_dit_load_from_pretrain: false
+use_lora: ${use_lora}
+lora: ${lora}
+vae_cond_pretrain_path: null
+mode: ${mode}
+share_vae_cond: null
+video_dit_config:
+  has_image_input: false
+  patch_size:
+  - 1
+  - 2
+  - 2
+  in_dim: 48
+  hidden_dim: 3072
+  ffn_dim: 14336
+  freq_dim: 256
+  text_dim: 4096
+  out_dim: 48
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  eps: 1.0e-06
+  seperated_timestep: true
+  require_clip_embedding: false
+  require_vae_embedding: false
+  fuse_vae_embedding_in_latents: true
+  use_gradient_checkpointing: ${model.mot_checkpoint_mixed_attn}
+  video_attention_mask_mode: first_frame_causal
+  action_conditioned: false
+  action_dim: ${data.train.processor.action_output_dim}
+  action_group_causal_mask_mode: group_diagonal
+  has_video_all_condition: true
+  video_all_injection_mode: patchify
+  video_all_context_mode: replace
+  video_all_num_query_tokens: 64
+  video_all_qformer_layers: 4
+  video_all_qformer_cross_attn_freq: 2
+action_dit_config:
+  action_dim: ${data.train.processor.action_output_dim}
+  hidden_dim: 1024
+  ffn_dim: 4096
+  num_heads: 24
+  attn_head_dim: 128
+  num_layers: 30
+  text_dim: 4096
+  freq_dim: 256
+  eps: 1.0e-06
+  use_gradient_checkpointing: ${model.mot_checkpoint_mixed_attn}
+  video_all_context_dim: null
+video_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+action_scheduler:
+  train_shift: 5.0
+  infer_shift: 5.0
+  num_train_timesteps: 1000
+loss:
+  lambda_video: 1.0
+  lambda_action: 1.0

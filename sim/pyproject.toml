@@ -1,0 +1,89 @@
+# Usage: python scripts/install.py --stage all
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simpleicl"
+version = "0.1.0"
+description = "SimpleICL: simulation data collection, robot policy training, and fixed-scene benchmarks"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+license = {text = "MIT"}
+dependencies = [
+  "torch==2.7.1+cu128",
+  "torchvision==0.22.1+cu128",
+  "numpy==1.26.4",
+  "accelerate==1.12.0",
+  "av==16.0.1",
+  "einops==0.8.1",
+  "h5py==3.14.0",
+  "hydra-core==1.3.2",
+  "omegaconf==2.3.0",
+  "imageio==2.37.0",
+  "imageio-ffmpeg==0.6.0",
+  "jsonlines==4.0.0",
+  "matplotlib==3.10.9",
+  "pandas==2.2.3",
+  "pillow==12.3.0",
+  "datasets==3.6.0",
+  "pyarrow==23.0.0",
+  "pyyaml==6.0.3",
+  "regex==2026.9.29",
+  "rich==15.0.0",
+  "safetensors==0.5.3",
+  "termcolor==3.3.0",
+  "torchcodec==0.5",
+  "tqdm==4.70.1",
+  "transformers==4.49.0",
+  "huggingface-hub==0.36.2",
+  "packaging==26.3",
+  "gitpython==3.2.0",
+  "opencv-python==4.11.0.86",
+]
+
+[project.optional-dependencies]
+# Download helpers are outside the reported training/evaluation baseline.
+download = ["modelscope"]
+sim = [
+  "sapien==3.0.0b1",
+  "mplib==0.2.1",
+  "transforms3d==0.4.2",
+  "scipy==1.10.1",
+  "toppra==0.6.3",
+  "gymnasium==0.29.1",
+  "trimesh==4.4.3",
+  "shapely==2.1.2",
+  "rtree==1.4.1",
+  "open3d==0.18.0",
+  "ipywidgets==8.1.9",
+  "pydantic==2.14.1",
+  "zarr==2.18.3",
+  "pyglet==1.5.31",
+  "nvidia-curobo @ git+https://github.com/NVlabs/curobo.git@d64c4b005459db10c5dd867d8b30a87d5bda9bdb",
+  "warp-lang==1.12.0",
+  "setuptools==80.10.2",
+]
+train = [
+  "deepspeed==0.18.5",
+  "wandb==0.23.1",
+  "nvidia-ml-py==13.615.71",
+]
+
+[project.scripts]
+simpleicl-collect = "simpleicl.cli:collect"
+simpleicl-prepare = "simpleicl.cli:prepare_data"
+simpleicl-train = "simpleicl.cli:train"
+simpleicl-evaluate = "simpleicl.cli:evaluate"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["simpleicl*", "robotwin*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+simpleicl = ["configs/**/*.yaml", "configs/**/*.json", "evaluation/policy/*.yml"]
+robotwin = ["task_config/*.yml", "task_config/*.yaml", "task_config/*.txt", "scene_config/*.yml", "description/**/*.json", "envs/scene/*.json"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__/*", "*.pyc"]

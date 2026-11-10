@@ -1,0 +1,88 @@
+train:
+  _target_: simpleicl.datasets.lerobot.robot_video_dataset.RobotVideoDataset
+  dataset_dirs:
+  - ${oc.env:SIMPLEICL_DATASET,./data/train_lerobot}
+  video_size:
+  - 384
+  - 320
+  video_all_size:
+  - 256
+  - 320
+  video_all_num_frames: 16
+  video_all_frame_percentage: null
+  video_all_max_num_frames: null
+  video_all_bucket_batching: true
+  shape_meta:
+    images:
+    - key: cam_high
+      raw_shape:
+      - 3
+      - 480
+      - 640
+      shape:
+      - 3
+      - 240
+      - 320
+    - key: cam_left_wrist
+      raw_shape:
+      - 3
+      - 480
+      - 640
+      shape:
+      - 3
+      - 240
+      - 320
+    - key: cam_right_wrist
+      raw_shape:
+      - 3
+      - 480
+      - 640
+      shape:
+      - 3
+      - 240
+      - 320
+    action:
+    - key: default
+      raw_shape: 14
+      shape: 14
+    state:
+    - key: default
+      raw_shape: 14
+      shape: 14
+  num_frames: 33
+  global_sample_stride: 1
+  action_video_freq_ratio: 4
+  camera_key: null
+  val_set_proportion: 0.01
+  is_training_set: true
+  override_instruction: ${override_instruction}
+  pretrained_norm_stats: null
+  skip_padding_as_possible: false
+  concat_multi_camera: robotwin
+  processor:
+    _target_: simpleicl.datasets.lerobot.processors.simpleicl_processor.SimpleICLProcessor
+    shape_meta: ${data.train.shape_meta}
+    num_obs_steps: ${data.train.num_frames}
+    num_output_cameras: 3
+    action_output_dim: 14
+    proprio_output_dim: 14
+    action_state_transforms: null
+    use_stepwise_action_norm: false
+    norm_default_mode: z-score
+    norm_exception_mode: null
+    action_state_merger:
+      _target_: simpleicl.datasets.lerobot.transforms.action_state_merger.ConcatLeftAlign
+    train_transforms:
+    - _target_: simpleicl.datasets.lerobot.transforms.image.ToTensor
+    - _target_: torchvision.transforms.Resize
+      size:
+      - 240
+      - 320
+    val_transforms:
+    - _target_: simpleicl.datasets.lerobot.transforms.image.ToTensor
+    - _target_: torchvision.transforms.Resize
+      size:
+      - 240
+      - 320
+  text_embedding_cache_dir: null
+  context_len: 128

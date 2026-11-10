@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+- override /data: robotwin
+- override /model: action_only
+- _self_
+batch_size: 16
+num_workers: 8
+model:
+  action_dit_pretrained_path: ${oc.env:SIMPLEICL_ACTION_INIT,./checkpoints/action_init.pt}
+data:
+  train:
+    video_all_num_frames: 16
+    video_all_frame_percentage: null
+    video_all_max_num_frames: null
+    video_all_bucket_batching: false
+    dataset_dirs:
+    - ${oc.env:SIMPLEICL_DATASET,./data/train_lerobot}
+    pretrained_norm_stats:
+    - ${oc.env:SIMPLEICL_DATASET,./data/train_lerobot}/dataset_stats.json
+    text_embedding_cache_dir: ${oc.env:SIMPLEICL_TEXT_CACHE,./outputs/cache/text}
+lr_scheduler_type: cosine
+learning_rate: 1e-4
+num_epochs: 5
+max_steps: null
+log_every: 10
+save_every: 2500
+eval_every: 500
+mode: vae_fix
+use_lora: false
+gradient_accumulation_steps: 1
+weight_decay: 1e-2
+resume: null

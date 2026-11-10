@@ -1,0 +1,19 @@
+{
+  "full_description": "close the open laptop",
+  "schema": "{A} is the laptop and {a} is the manipulating arm",
+  "preference": "num of words should not exceed 10",
+  "seen": [
+    "Use {a} to close {A}",
+    "Lower the lid of {A}",
+    "Close {A} with {a}",
+    "Fold {A} shut",
+    "Use {a} to shut {A}"
+  ],
+  "unseen": [
+    "Shut the open {A}",
+    "Bring the lid of {A} down",
+    "Close the screen of {A}",
+    "Use {a} to fold {A} closed",
+    "Lower {A} until it is closed"
+  ]
+}

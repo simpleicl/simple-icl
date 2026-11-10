@@ -1,13 +1,9 @@
 # SimpleICL
 
-论文 **《In-context Robot Learning Made Simple: A Democratized Recipe for Manipulation Tasks》** 的官方代码仓库。
-
 [![English](https://img.shields.io/badge/README-English-111111.svg)](./README.md)
 [![中文](https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-d14836.svg)](./README_zh.md)
 
-[![arXiv](https://img.shields.io/badge/arXiv-2609.38173-b31b1b.svg)](https://arxiv.org/pdf/2609.38173)
-[![Project Page](https://img.shields.io/badge/Project_Page-SimpleICL-2ea44f.svg)](https://simpleicl.github.io/simpleicl/)
-[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-%E7%9C%9F%E6%9C%BA%E6%95%B0%E6%8D%AE%E6%A0%B7%E4%BE%8B-FFD21E.svg)](https://huggingface.co/datasets/ly152/simpleicl-sample)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-%E7%9C%9F%E6%9C%BA%E6%95%B0%E6%8D%AE%E6%A0%B7%E4%BE%8B-FFD21E.svg)](https://huggingface.co/datasets/SimpleICL/simpleicl-sample)
 [![ModelScope](https://img.shields.io/badge/ModelScope-%E7%9C%9F%E6%9C%BA%E6%95%B0%E6%8D%AE%E6%A0%B7%E4%BE%8B-6247eb.svg)](https://www.modelscope.cn/datasets/ly985211/simpleicl-sample)
 
 本仓库涵盖完整流程——SimpleICL 策略训练与 Franka FR3 真机部署，以及背后的人-机配对数据采集方案：
@@ -41,13 +37,15 @@
 
 ## 1. 安装
 
-两侧可以共用一个 conda 环境，也可以分开建。
+真机目录内的模型侧和采集侧可以共用一个 conda 环境，也可以分开建。真机环境必须与 `simpleicl-sim` 分离，两套实现都使用 `simpleicl` 包名。
+
+统一仓库中，安装命令从 `real/` 开始；每个以 `cd` 开头的小节都先回到 `real/`。
 
 ### 1.1 Python 环境
 
 ```bash
-conda create -n simpleicl python=3.10 -y
-conda activate simpleicl
+conda create -n simpleicl-real python=3.10 -y
+conda activate simpleicl-real
 pip install -U pip
 ```
 

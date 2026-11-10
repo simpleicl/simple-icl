@@ -1,0 +1,79 @@
+# @package _global_
+
+defaults:
+- train
+- override /task: action_only
+- _self_
+ckpt: null
+gpu_id: 0
+model:
+  load_text_encoder: true
+  skip_dit_load_from_pretrain: false
+  action_dit_pretrained_path: null
+EVALUATION:
+  robotwin_root: ${oc.env:SIMPLEICL_ROBOTWIN_ROOT,./src/robotwin}
+  scene_dir: null
+  legacy_articulated_placement: false
+  placement_id: null
+  embodiment: null
+  condition_embodiment: aloha-agilex
+  episode_id: null
+  visual_episode_seed: 42
+  episodes_per_task: null
+  result_name: null
+  result_subdir: null
+  native_only: true
+  batch_worker: false
+  batch_shard: 0
+  batch_shards: 1
+  batch_output_subdir: null
+  resume: false
+  resume_dir: null
+  policy_name: simpleicl_policy
+  task_name: null
+  task_names: null
+  task_config: demo_randomized
+  instruction_type: unseen
+  override_instruction: ${override_instruction}
+  eval_num_episodes: 100
+  exclude_hardcoded_tasks: false
+  output_dir: ./outputs/evaluation/${now:%Y%m%d_%H%M%S}
+  action_horizon: null
+  replan_steps: 24
+  num_inference_steps: ${eval_num_inference_steps}
+  sigma_shift: null
+  text_cfg_scale: 1.0
+  negative_prompt: ''
+  rand_device: cpu
+  tiled: false
+  timing_enabled: false
+  vis_video: false
+  attention_visualization:
+    enabled: false
+    save_stats: true
+    fps: 8
+  skip_get_obs_within_replan: true
+  dataset_stats_path: null
+  pretrained_model_path: null
+  device: cuda
+  video_all_path: null
+  video_all_online: false
+  video_all_online_dir: null
+  video_all_capture_stride: 15
+  video_all_num_frames: ${data.train.video_all_num_frames}
+  video_all_frame_percentage: ${data.train.video_all_frame_percentage}
+  video_all_max_num_frames: ${data.train.video_all_max_num_frames}
+  scene_db_path: null
+  model_server_host: null
+  model_server_port: null
+MULTIRUN:
+  enabled: false
+  num_gpus: 1
+  gpu_ids: null
+  max_tasks_per_gpu: 1
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null
