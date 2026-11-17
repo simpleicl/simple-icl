@@ -1,7 +1,10 @@
 # SimpleICL-Sim
 
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Pretrained_models-FFD21E.svg)](https://huggingface.co/SimpleICL/SimpleICL)
+
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-ICL--Oriented_Training_Set-FFD21E.svg)](https://huggingface.co/datasets/SimpleICL/ICL-oriented-Training-Set)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Raw_ICL--Oriented_Training_Set-FFD21E.svg)](https://huggingface.co/datasets/SimpleICL/Raw-ICL-oriented-Training-Set)
+
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Semantic_Discrimination_Test_Set-FFD21E.svg)](https://huggingface.co/datasets/SimpleICL/Semantic-Discrimination-Test-Set)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Out_Of_Distribution_Test_Set-FFD21E.svg)](https://huggingface.co/datasets/SimpleICL/Out-Of-Distribution-Test-Set)
 
